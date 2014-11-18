@@ -21,6 +21,9 @@ read.csv("GDP.csv",head=FALSE,col.names = c("CountryCode","Ranking","","Economy"
           nrows=231,skip=5,stringsAsFactors = FALSE,) -> gdp
 gdp %>% select(CountryCode,Ranking,Economy,GDP) %>% filter(!is.na(CountryCode)) -> gdp
 read.csv("EDSTATS_Country.csv",stringsAsFactors=FALSE) -> edsc
-inner_join(gdp,edsc,by="CountryCode")  %>% select(CountryCode,Ranking,Economy)  %>% filter(!is.na(Ranking)) %>% nrow()
-inner_join(gdp,edsc,by="CountryCode")  %>% select(CountryCode,Ranking,Economy)  %>% filter(!is.na(Ranking)) %>% arrange(desc(Ranking)) %>% head(13)
+inner_join(gdp,edsc,by="CountryCode")  %>% select(CountryCode,Ranking,Economy,Income.Group,GDP)  %>% filter(!is.na(Ranking)) %>% arrange(desc(Ranking)) %>% group_by(Income.Group) -> Gdp
+nrow(Gdp)
+head(Gdp,13)
+summarise(Gdp,mean(Ranking))
+
 
