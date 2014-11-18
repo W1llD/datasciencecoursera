@@ -1,0 +1,26 @@
+getdata-009
+
+Week 3 
+
+Question 1
+read.csv("ss06hid.csv") -> w3q1
+w3q1 %>% mutate (agricultureLogical = (AGS==6)) -> w3q1
+which(w3q1$agricultureLogical)
+
+Question 2
+install.packages("jpeg")
+library(jpeg)
+readJPEG("jeff.jpg",native = TRUE) -> jeff
+quantile(jeff,probs = c(0.3,0.8))
+
+
+Question 3-5
+
+library(dplyr)
+read.csv("GDP.csv",head=FALSE,col.names = c("CountryCode","Ranking","","Economy","GDP","","","","","",""), 
+          nrows=231,skip=5,stringsAsFactors = FALSE,) -> gdp
+gdp %>% select(CountryCode,Ranking,Economy,GDP) %>% filter(!is.na(CountryCode)) -> gdp
+read.csv("EDSTATS_Country.csv",stringsAsFactors=FALSE) -> edsc
+inner_join(gdp,edsc,by="CountryCode")  %>% select(CountryCode,Ranking,Economy)  %>% filter(!is.na(Ranking)) %>% nrow()
+inner_join(gdp,edsc,by="CountryCode")  %>% select(CountryCode,Ranking,Economy)  %>% filter(!is.na(Ranking)) %>% arrange(desc(Ranking)) %>% head(13)
+
