@@ -11,4 +11,9 @@ NEI %>% summarise(sum(Emissions)) %>% plot(col="red",type="l")
 ##plot2
 NEI %>% filter(fips == 24510) %>% summarise(sum(Emissions)) %>% plot(col="red",type="l")
 
+##plot3
+library(ggplot2)
+NEI %>% group_by(year,type) %>% filter(fips == 24510) %>% summarise(sum_Emi = sum(Emissions)) -> bEmi
+ggplot(bEmi,aes(year, sum_Emi)) + geom_line(colour= "red") -> p
+p + facet_grid(. ~ type)
 
