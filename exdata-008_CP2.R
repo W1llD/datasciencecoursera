@@ -20,9 +20,8 @@ plot(x = p1$Year,
      type = "l",
      xlab = "Year",
      ylab = "Total of Emissions",
-     sub = "Total emissions from PM2.5 in the United States from 1999 to 2008",
-     xlim = c(1998,2009),
-     ylim = c(1800,3400)) 
+     sub = "Total PM2.5 Emissions in the United States between 1999-2008",
+     xlim = c(1998,2009)) 
 dev.off()
 
 ##plot2
@@ -36,9 +35,8 @@ plot(x = p2$Year,
      type = "l",
      xlab = "Year",
      ylab = "Total of Emissions",
-     sub = "Total emissions from PM2.5 in the Baltimore City from 1999 to 2008",
-     xlim = c(1998,2009),
-     ylim = c(1800,3400)) 
+     sub = "Total PM2.5 Emissions in the Baltimore City between 1999-2008",
+     xlim = c(1998,2009)) 
 dev.off()
 
 ##plot3
@@ -49,6 +47,7 @@ c("Year","Type","SumEmissions") -> names(p3)
 
 p <- ggplot(p3, aes(x=Year,  y=SumEmissions, group=Type)) + 
      geom_line(size=1, aes(colour=Type, group=Type)) + 
+     ggtitle('Total Emissions in Baltimore.') + 
      theme_gdocs()
 png(file='plot3.png')
 p
@@ -68,9 +67,8 @@ plot(x = p4$Year,
      type = "l",
      xlab = "Year",
      ylab = "Total of Emissions",
-     sub = "Total Emissions from Coal in US from 1999 to 2008",
-     xlim = c(1998,2009),
-     ylim = c(340000,580000)) 
+     sub = "Total Emissions from Coal in US between 1999-2008",
+     xlim = c(1998,2009)) 
 dev.off()
 
 
@@ -89,7 +87,7 @@ plot(x = p5$Year,
      type = "l",
      xlab = "Year",
      ylab = "Total of Emissions",
-     sub = "Total Emissions from Vehicle from 1999–2008 in Baltimore City",
+     sub = "Total Emissions from Vehicle in Baltimore City between 1999-2008",
      xlim = c(1998,2009),
      ylim = c(80,350)) 
 dev.off()
@@ -108,6 +106,3 @@ p <- ggplot(p6, aes(x=Year,  y=SumEmissions, group=Fips)) +
 png(file='plot6.png')
 p
 dev.off()
-
-
-
