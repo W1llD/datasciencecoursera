@@ -3,19 +3,18 @@ library(dplyr)
 library(ggplot2)
 library(ggthemes)
 
-
+##load data from files
 readRDS("summarySCC_PM25.rds") -> NEI
 readRDS("Source_Classification_Code.rds") -> scc
 
 ##plot1
-###NEI %>% group_by(year) %>% summarise(sum(Emissions)) %>% plot(col="red",type="l")
-####re-write
+###NEI %>% group_by(year) %>% summarise(sum(Emissions)) %>% plot(col="red",type="l",xlab="Year",ylab="Sum of Emissions")
 NEI %>% group_by(year) %>% summarise(sum(Emissions)) -> p1
-c("Year","SumEmission") -> names(p1)
+c("Year","SumEmissions") -> names(p1)
 
 png(file="plot1.png")
 plot(x = p1$Year,
-     y = p1$SumEmission,
+     y = p1$SumEmissions,
      col = "red",
      type = "l",
      xlab = "Year",
@@ -25,6 +24,7 @@ plot(x = p1$Year,
 dev.off()
 
 ##plot2
+###NEI %>% group_by(year) %>% filter(fips == "24510") %>% summarise(sum(Emissions)) %>% plot(col="red",type="l",xlab="Year",ylab="Sum of Emissions")
 NEI %>% group_by(year) %>% filter(fips == "24510") %>% summarise(sum(Emissions)) -> p2
 c("Year","SumEmission") -> names(p2)
 
@@ -41,7 +41,6 @@ dev.off()
 
 ##plot3
 ###NEI %>% group_by(year,type) %>% filter(fips == "24510") %>% summarise(sum_Emi = sum(Emissions)) %>% ggplot(aes(year, sum_Emi)) + geom_line(colour= "red") + facet_grid(. ~ type)
-####re-write
 NEI %>% group_by(year,type) %>% filter(fips == "24510") %>% summarise(sum(Emissions)) -> p3
 c("Year","Type","SumEmissions") -> names(p3) 
 
