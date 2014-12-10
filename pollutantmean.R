@@ -16,12 +16,12 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
 		x <- data.frame(Date=as.Date(character()),sulfate=numeric(0),nitrate=numeric(0),ID=integer(0),stringsAsFactors = FALSE)
 		files <- paste(paste(directory,formatC(x=id,width = 3,flag = "0"), sep = "/"),".csv", sep = "")
 		for (f in files) x <- rbind(x,read.csv(f))
-		x[complete.cases(x),] -> x
+		##x[complete.cases(x),] -> x
 		pm <- if (pollutant == "sulfate") 	   {
-						mean(x$sulfate) 
+						mean(x$sulfate, na.rm = TRUE) 
 									        }
 		      else if (pollutant == "nitrate") {
-						mean(x$nitrate) 
+						mean(x$nitrate, na.rm = TRUE) 
 											}
 			  else {0}
 		return(pm)
